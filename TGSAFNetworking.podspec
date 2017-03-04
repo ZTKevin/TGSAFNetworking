@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TGSAFNetworking"
-  s.version      = "1.0.0"
+  s.version      = "3.0.1"
   s.summary      = "A NetWorking is TGSAFNetworking."
   s.platform     = :ios, "7.0"
   s.description  = <<-DESC
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/ZTKevin/TGSAFNetworking.git", :tag => "#{s.version}" }
 
-  s.source_files  =  "TGSAFNetworking/*.{h,m}"
+  s.source_files  = "TGSAFNetworking/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
   # s.public_header_files = "Classes/**/*.h"
 

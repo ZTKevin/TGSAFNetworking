@@ -41,11 +41,11 @@
 {
     //NSLog(@"here");
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-    [session GET:@"请求的url" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"成功");
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"失败");
-    }];
+//    [session GET:urlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+//        NSLog(@"成功");
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        NSLog(@"失败");
+//    }];
     
     [session POST:urlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
