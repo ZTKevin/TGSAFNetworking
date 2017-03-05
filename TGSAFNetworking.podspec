@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TGSAFNetworking"
-  s.version      = "3.0.2"
+  s.version      = "3.0.3"
   s.summary      = "A NetWorking is TGSAFNetworking."
   s.platform     = :ios, "7.0"
   s.description  = <<-DESC
@@ -20,18 +20,8 @@ TGSAFN 调用类方法
 类似:
 [TGSAFN postWithUrl:@"www.baidu.com" parameters:nil success:^(id responseObject) {
 //请求成功...
-UIAlertController *AVC = [UIAlertController alertControllerWithTitle:@"SUCCESS" message:@"成功了" preferredStyle: UIAlertControllerStyleAlert];
-[AVC addAction:[UIAlertAction actionWithTitle:@"取消" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
-}]];
-//网络连接失败...
-[self presentViewController:AVC animated:YES completion:nil];
 } fail:^{
-UIAlertController *AVC = [UIAlertController alertControllerWithTitle:@"NO NETWORK" message:@" 失败了" preferredStyle: UIAlertControllerStyleAlert];
-[AVC addAction:[UIAlertAction actionWithTitle:@"取消" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
-}]];
-[self presentViewController:AVC animated:YES completion:nil];
+//网络连接失败...
 }];
 
                    DESC
