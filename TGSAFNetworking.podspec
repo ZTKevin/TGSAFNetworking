@@ -9,11 +9,31 @@
 Pod::Spec.new do |s|
 
   s.name         = "TGSAFNetworking"
-  s.version      = "3.0.1"
+  s.version      = "3.0.2"
   s.summary      = "A NetWorking is TGSAFNetworking."
   s.platform     = :ios, "7.0"
   s.description  = <<-DESC
-一个基于 AF的网络请求,自己的库
+一个基于 AF的网络请求,自己的库,
+1.post 网络请求<TGSAFNetworking>
+#import <TGSAFN.h>
+TGSAFN 调用类方法
+类似:
+[TGSAFN postWithUrl:@"www.baidu.com" parameters:nil success:^(id responseObject) {
+//请求成功...
+UIAlertController *AVC = [UIAlertController alertControllerWithTitle:@"SUCCESS" message:@"成功了" preferredStyle: UIAlertControllerStyleAlert];
+[AVC addAction:[UIAlertAction actionWithTitle:@"取消" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+
+}]];
+//网络连接失败...
+[self presentViewController:AVC animated:YES completion:nil];
+} fail:^{
+UIAlertController *AVC = [UIAlertController alertControllerWithTitle:@"NO NETWORK" message:@" 失败了" preferredStyle: UIAlertControllerStyleAlert];
+[AVC addAction:[UIAlertAction actionWithTitle:@"取消" style: UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+
+}]];
+[self presentViewController:AVC animated:YES completion:nil];
+}];
+
                    DESC
 
   s.homepage     = "https://github.com/ZTKevin/TGSAFNetworking"
@@ -21,7 +41,7 @@ Pod::Spec.new do |s|
 
 
   s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
 
 
