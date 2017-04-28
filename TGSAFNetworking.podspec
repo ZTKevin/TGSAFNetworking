@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "TGSAFNetworking"
-  s.version      = "3.0.3"
+  s.version      = "3.0.4"
   s.summary      = "A NetWorking is TGSAFNetworking."
   s.platform     = :ios, "7.0"
   s.description  = <<-DESC
