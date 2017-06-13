@@ -36,6 +36,28 @@
     }];
 }
 
++ (void)postWithUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat _Nullable)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:time?time:3.0];
+    
+    [manager POST:urlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (fail) {
+            fail(error);
+        }
+    }];
+
+}
 
 + (void)postWithUrl:(NSString *_Nullable)urlStr parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail
 {
