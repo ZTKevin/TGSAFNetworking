@@ -36,7 +36,7 @@
     }];
 }
 
-+ (void)postWithUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat _Nullable)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
++ (void)postWithTimeUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     

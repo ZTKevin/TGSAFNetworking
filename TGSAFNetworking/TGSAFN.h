@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, RequestStyle) {
 //@param parameters NSDictionary* 参量
 //@param sccess ^(id responseObject)  成功回调block
 //@param fail ^()fail   失败回调block
-+ (void)postWithUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat _Nullable)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
++ (void)postWithTimeUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
 
 + (void)postWithUrl:(NSString *_Nullable)urlStr  parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
 +(void)uploadImageWithURL:(NSString*_Nullable)url parameters:(id _Nullable )param image:(UIImage*_Nullable)image imageName:(NSString*_Nullable)imagename success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
