@@ -44,7 +44,7 @@
     
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:10.0];
+    [manager.requestSerializer setTimeoutInterval:3.0];
     //    [session GET:urlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     //        NSLog(@"成功");
     //    } failure:^(NSURLSessionDataTask *task, NSError *error) {
