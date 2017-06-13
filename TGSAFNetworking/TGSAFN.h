@@ -10,6 +10,20 @@
 #import "AFNetworking.h"
 
 @interface TGSAFN : NSObject
+
+typedef NS_ENUM(NSUInteger, ResposeStyle) {
+    JSON,
+    XML,
+    Data,
+};
+
+typedef NS_ENUM(NSUInteger, RequestStyle) {
+    RequestJSON,
+    RequestString,
+    RequestDefault
+};
+
+
 //检测网络状态
 + (void)netWorkStatus;
 //Post发送数据
@@ -19,4 +33,7 @@
 //@param fail ^()fail   失败回调block
 + (void)postWithUrl:(NSString *_Nullable)urlStr parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
 +(void)uploadImageWithURL:(NSString*_Nullable)url parameters:(id _Nullable )param image:(UIImage*_Nullable)image imageName:(NSString*_Nullable)imagename success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
+
+
++ (void)upLoadToUrlString:(NSString *_Nullable)url parameters:(NSDictionary* _Nullable )parameters fileData:(NSData* _Nullable )fileData name:(NSString* _Nullable )name fileName:(NSString* _Nullable )fileName mimeType:(NSString* _Nullable )mimeType response:(ResposeStyle)style progress:(void (^_Nullable)(NSProgress *_Nullable progress))progress success:(void (^_Nullable)(NSURLSessionDataTask* _Nullable task, id _Nullable responseObject))success failure:(void (^_Nullable)(NSURLSessionDataTask* _Nullable task, NSError * _Nullable error))failure;
 @end

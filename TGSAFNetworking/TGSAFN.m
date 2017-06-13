@@ -32,7 +32,7 @@
     
     // 检测网络连接的单例,网络变化时的回调方法
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        NSLog(@"%d", (int)status);
+        
     }];
 }
 
@@ -91,7 +91,8 @@
     
     //1。创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:10.0];
     //2.上传文件
     //    NSDictionary *dict = @{@"username":@"1234"};
     
@@ -129,4 +130,48 @@
     }];
     
 }
+
++ (void)upLoadToUrlString:(NSString *_Nullable)url parameters:(NSDictionary* _Nullable )parameters fileData:(NSData* _Nullable )fileData name:(NSString* _Nullable )name fileName:(NSString* _Nullable )fileName mimeType:(NSString* _Nullable )mimeType response:(ResposeStyle)style progress:(void (^_Nullable)(NSProgress *_Nullable progress))progress success:(void (^_Nullable)(NSURLSessionDataTask* _Nullable task, id _Nullable responseObject))success failure:(void (^_Nullable)(NSURLSessionDataTask* _Nullable task, NSError * _Nullable error))failure {
+    
+    //1.获取单例的网络管理对象
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    //2.根据style 的类型 去选择返回值得类型
+    switch (style) {
+        case JSON:
+            manager.responseSerializer = [AFJSONResponseSerializer serializer];
+            break;
+        case XML:
+            manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+            break;
+        case Data:
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            break;
+        default:
+            break;
+    }
+    
+    //3.设置相应数据支持的类型
+    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/plain", @"application/javascript",@"application/json", @"application/x-www-form-urlencoded", nil]];
+    
+    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        [formData appendPartWithFileData:fileData name:name fileName:fileName mimeType:mimeType];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        //打印下上传进度
+        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(task, responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if (failure) {
+            failure(task, error);
+        }
+    }];
+}
+
 @end
