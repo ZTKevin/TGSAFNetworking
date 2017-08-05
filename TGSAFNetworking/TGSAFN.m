@@ -16,10 +16,8 @@
 
 #import "TGSAFN.h"
 
-
 @implementation TGSAFN
-+ (void)netWorkStatus
-{
++ (void)netWorkStatus:(nullable void(^)(AFNetworkReachabilityStatus status))block{
     /**
      AFNetworkReachabilityStatusUnknown          = -1,  // 未知
      AFNetworkReachabilityStatusNotReachable     = 0,   // 无连接
@@ -27,15 +25,20 @@
      AFNetworkReachabilityStatusReachableViaWiFi = 2,   // WiFi
      */
     // 如果要检测网络状态的变化,必须用检测管理器的单例的startMonitoring
+    
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
-    
     // 检测网络连接的单例,网络变化时的回调方法
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        if (block) {
+            block(status);
+        }
         
     }];
-}
 
+}
+-(void)networkStatusBlock:(TGSNetworkStatusBlock)bloack{
+    
+}
 + (void)postWithTimeUrl:(NSString *_Nullable)urlStr timeInWait:(CGFloat)time parameters:(id _Nullable )parameters success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail;
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -86,27 +89,6 @@
         }
     }];
     
-    /* AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-     // 设置请求格式
-     //manager.requestSerializer = [AFJSONRequestSerializer serializer];
-     // 设置返回格式
-     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-     //NSLog(@"here");
-     [manager POST:urlStr parameters:parameters
-     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-     //              NSString *result = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-     //              NSLog(@"%@",result);
-     if (success) {
-     success(responseObject);
-     }
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-     NSLog(@"%@", error);
-     if (fail) {
-     fail();
-     }
-     }];
-     //NSLog(@"here");
-     */
     
 }
 +(void)uploadImageWithURL:(NSString*_Nullable)url parameters:(id _Nullable )param image:(UIImage*_Nullable)image imageName:(NSString*_Nullable)imagename success:(void (^_Nullable)(id _Nullable responseObject))success fail:(void (^_Nullable)(NSError * _Nonnull error))fail{
@@ -116,9 +98,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:10.0];
     //2.上传文件
-    //    NSDictionary *dict = @{@"username":@"1234"};
-    
-    //    NSString *urlString = @"22222";
+
     [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //上传文件参数
         //        UIImage *iamge = [UIImage imageNamed:@"123.png"];
@@ -138,7 +118,7 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
         //打印下上传进度
-        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+//        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
@@ -182,7 +162,7 @@
         
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         //打印下上传进度
-        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+//        NSLog(@"%lf",1.0 *uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {

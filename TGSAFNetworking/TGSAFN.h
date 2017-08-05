@@ -22,10 +22,12 @@ typedef NS_ENUM(NSUInteger, RequestStyle) {
     RequestString,
     RequestDefault
 };
-
+typedef void (^TGSNetworkStatusBlock)(AFNetworkReachabilityStatus status);
+@property (readwrite, nonatomic, copy) TGSNetworkStatusBlock _Nullable networkStatusBlock;
 
 //检测网络状态
-+ (void)netWorkStatus;
++ (void)netWorkStatus:(nullable void(^)(AFNetworkReachabilityStatus status))block;
+
 //Post发送数据
 //@param urlStr post地址
 //@param parameters NSDictionary* 参量
