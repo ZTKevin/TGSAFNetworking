@@ -45,7 +45,7 @@
     
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:time?time:3.0];
+    [manager.requestSerializer setTimeoutInterval:time?time:8.0];
     
     [manager POST:urlStr parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -69,7 +69,7 @@
     
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:3.0];
+    [manager.requestSerializer setTimeoutInterval:8.0];
     //    [session GET:urlStr parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
     //        NSLog(@"成功");
     //    } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -96,7 +96,7 @@
     //1。创建管理者对象
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:10.0];
+    [manager.requestSerializer setTimeoutInterval:20.0];
     //2.上传文件
 
     [manager POST:url parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
